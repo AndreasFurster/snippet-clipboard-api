@@ -14,6 +14,7 @@ import { SnippetsModule } from './snippets/snippets.module';
       autoSchemaFile: true,
       path: '/',
       playground: true,
+      introspection: true,
     }),
 
     SnippetsModule
