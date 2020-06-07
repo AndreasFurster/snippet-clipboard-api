@@ -12,13 +12,11 @@ import { SnippetsModule } from './snippets/snippets.module';
     MongooseModule.forRoot(process.env.MONGODB_URI),
     GraphQLModule.forRoot({
       autoSchemaFile: true,
-      path: '/'
+      path: '/',
+      playground: true,
     }),
 
     SnippetsModule
-  ],
-  controllers: [
-    // AppController
   ],
   providers: [AppService],
 })

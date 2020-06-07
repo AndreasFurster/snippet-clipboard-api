@@ -7,10 +7,6 @@ import { SnippetsResolver } from './snippets.resolver';
 @Module({
   imports: [
     MongooseModule.forFeature([{ name: Snippet.name, schema: SnippetSchema }]),
-    // SnippetsService
-  ],
-  controllers: [
-    // SnippetController
   ],
   providers: [
     SnippetsService,
