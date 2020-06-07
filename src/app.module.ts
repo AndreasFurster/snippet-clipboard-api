@@ -3,9 +3,7 @@ import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
 import { GraphQLModule } from '@nestjs/graphql';
 
-import { AppController } from './app.controller';
 import { AppService } from './app.service';
-
 import { SnippetsModule } from './snippets/snippets.module';
 
 @Module({
