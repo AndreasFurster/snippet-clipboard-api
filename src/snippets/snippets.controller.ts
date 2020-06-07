@@ -1,7 +1,7 @@
 import { Controller, Get, Post, Body } from '@nestjs/common';
 import { SnippetsService } from './snippets.service';
 import { Snippet } from './schemas/snippet.schema';
-import { CreateSnippetDto } from './dto/create-snippet.dto';
+// import { CreateSnippetDto } from './dto/snippet-input';
 
 @Controller('/snippets')
 export class SnippetController {
@@ -12,8 +12,8 @@ export class SnippetController {
     return this.snippetsService.findAll();
   }
 
-  @Post()
-  async create(@Body() createSnippetDto: CreateSnippetDto) {
-    return this.snippetsService.create(createSnippetDto)
-  }
+  // @Post()
+  // async create(@Body() createSnippetDto: CreateSnippetDto) {
+    // return this.snippetsService.create(createSnippetDto)
+  // }
 }

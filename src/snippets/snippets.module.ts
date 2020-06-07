@@ -3,10 +3,19 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { SnippetController } from './snippets.controller';
 import { SnippetsService } from './snippets.service';
 import { Snippet, SnippetSchema } from './schemas/snippet.schema';
+import { SnippetsResolver } from './snippets.resolver';
 
 @Module({
-  imports: [MongooseModule.forFeature([{ name: Snippet.name, schema: SnippetSchema }])],
-  controllers: [SnippetController],
-  providers: [SnippetsService],
+  imports: [
+    MongooseModule.forFeature([{ name: Snippet.name, schema: SnippetSchema }]),
+    // SnippetsService
+  ],
+  controllers: [
+    // SnippetController
+  ],
+  providers: [
+    SnippetsService,
+    SnippetsResolver
+  ],
 })
 export class SnippetsModule {}

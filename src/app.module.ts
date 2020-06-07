@@ -1,6 +1,7 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
 import { MongooseModule } from '@nestjs/mongoose';
+import { GraphQLModule } from '@nestjs/graphql';
 
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
@@ -11,9 +12,16 @@ import { SnippetsModule } from './snippets/snippets.module';
   imports: [
     ConfigModule.forRoot(),
     MongooseModule.forRoot(process.env.MONGODB_URI),
+    GraphQLModule.forRoot({
+      autoSchemaFile: true,
+      path: '/'
+    }),
+
     SnippetsModule
   ],
-  controllers: [AppController],
+  controllers: [
+    // AppController
+  ],
   providers: [AppService],
 })
 export class AppModule {}
