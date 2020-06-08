@@ -13,12 +13,18 @@ export class SnippetsResolver {
 
   @Query(() => [Snippet])
   async snippets() : Promise<Snippet[]> {
-    return this.snippetsService.findAll();
+    const snippets = await this.snippetsService.findAll();
+    return snippets.map(s => this.includePreviewText(s))
+  }
+
+  @Query(() => Snippet)
+  async singleSnippet(@Args('id') id: string) : Promise<Snippet> {
+    const snippet = await this.snippetsService.findOneById(id);
+    return this.includePreviewText(snippet)
   }
 
   @Mutation(() => Snippet)
   async createItem(@Args('input') input: SnippetInput): Promise<Snippet> {
-    
     return this.snippetsService.create(input);
   }
 
@@ -36,6 +42,10 @@ export class SnippetsResolver {
     return new SnippetDeletedResult(id);
   }
 
+  private includePreviewText(snippet: Snippet) : Snippet {
+    snippet.preview = snippet.preview ?? snippet.content.substring(0, 100)
+    return snippet
+  }
   // @ResolveField()
   // async posts(@Parent() author: Author) {
   //   const { id } = author;
