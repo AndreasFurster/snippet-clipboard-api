@@ -24,16 +24,17 @@ export class SnippetsResolver {
   }
 
   @Mutation(() => Snippet)
-  async createItem(@Args('input') input: SnippetInput): Promise<Snippet> {
-    return this.snippetsService.create(input);
+  async createItem(): Promise<Snippet> {
+    return this.snippetsService.create();
   }
 
   @Mutation(() => Snippet)
   async updateItem(
     @Args('id') id: string,
     @Args('input') input: SnippetInput,
-  ): Promise<Snippet> {
-    return this.snippetsService.update(id, input);
+  ) : Promise<Snippet> {
+    const snippet = await this.snippetsService.update(id, input);
+    return this.includePreviewText(snippet)
   }
 
   @Mutation(returns => SnippetDeletedResult)
@@ -43,7 +44,7 @@ export class SnippetsResolver {
   }
 
   private includePreviewText(snippet: Snippet) : Snippet {
-    snippet.preview = snippet.preview ?? snippet.content.substring(0, 100)
+    snippet.preview = snippet.preview ?? (snippet.content ? snippet.content.substring(0, 100) : '')
     return snippet
   }
   // @ResolveField()

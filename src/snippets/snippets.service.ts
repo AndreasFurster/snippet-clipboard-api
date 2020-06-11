@@ -8,8 +8,8 @@ import { SnippetInput } from './dto/snippet-input';
 export class SnippetsService {
   constructor(@InjectModel(Snippet.name) private snippetModel: Model<Snippet>) {}
 
-  create(snippet: SnippetInput): Promise<Snippet> {
-    const createdSnippet = new this.snippetModel(snippet);
+  create(): Promise<Snippet> {
+    const createdSnippet = new this.snippetModel();
     return createdSnippet.save();
   }
   
@@ -21,12 +21,13 @@ export class SnippetsService {
     return this.snippetModel.findById(id).exec()
   }
   
-  update(id: string, snippet: SnippetInput): Promise<Snippet> {
-    return this.snippetModel.update((s: Snippet) => s.id == id, snippet).exec();
+  async update(id: string, snippet: SnippetInput): Promise<Snippet> {
+    await this.snippetModel.findOneAndUpdate({ _id: id }, snippet).exec();
+    return this.snippetModel.findById(id).exec();
   }
 
   delete(id: string): Promise<any> {
-    return this.snippetModel.deleteMany({ id }).exec();
+    return this.snippetModel.deleteMany({ _id: id }).exec();
   }
   
 }

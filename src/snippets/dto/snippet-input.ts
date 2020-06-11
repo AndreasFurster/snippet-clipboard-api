@@ -6,5 +6,14 @@ export class SnippetInput {
   name: string;
 
   @Field()
+  type: string;
+
+  @Field({ nullable: true })
+  keywords: string;
+
+  @Field({ nullable: true })
+  language: string;
+
+  @Field()
   content: string;
 }

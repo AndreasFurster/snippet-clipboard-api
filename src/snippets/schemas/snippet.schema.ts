@@ -10,14 +10,26 @@ export class Snippet extends Document {
   id: string;
 
   @Prop()
-  @Field()
+  @Field({ nullable: true })
+  type: string;
+
+  @Prop()
+  @Field({ nullable: true })
+  keywords: string;
+
+  @Prop()
+  @Field({ nullable: true })
   name: string;
   
+  @Prop()
+  @Field({ nullable: true })
+  language: string;
+
   @Field({ nullable: true })
   preview?: string;
 
   @Prop()
-  @Field()
+  @Field({ nullable: true })
   content: string;
 }
 
